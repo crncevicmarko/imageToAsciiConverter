@@ -1,8 +1,12 @@
 from PIL import Image, ImageDraw, ImageFont
 
-asciiCharacters =  "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,. "
+asciiCharacters =  "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,. "[::-1]
 asciiCharactersList = list(asciiCharacters)
 asciiCharactersLenght = len(asciiCharactersList)
+
+scaleFactor = 0.1
+oneCharWidth = 10
+oneCharHeight = 18
 
 def resizeImage(image):
     width, height = im.size
@@ -27,7 +31,7 @@ im = Image.open("Luffy.jpg")
 newImage = resizeImage(im)
 grayImage = convertImageToGrayScale(newImage)
 
-ascii_art_image = Image.new("L", (grayImage.width * 10, grayImage.height * 10), color=255)
+ascii_art_image = Image.new("RGB", (grayImage.width * 10, grayImage.height * 10), color=(0,0,0))
 draw = ImageDraw.Draw(ascii_art_image)
 font = ImageFont.load_default()
 
