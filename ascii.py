@@ -22,21 +22,18 @@ def mapAsciiToBrightnes(brightnesOfThePixel, asciiCharacters):
     # returning right character from list
     return asciiCharacters[asciiIndexThatIsGoingToTheImage]
 
+# load the image
 im = Image.open("Luffy.jpg")
-print("Original: ",im.height, im.width)
-im.show()
 newImage = resizeImage(im)
 grayImage = convertImageToGrayScale(newImage)
 
 ascii_art_image = Image.new("L", (grayImage.width * 10, grayImage.height * 10), color=255)
 draw = ImageDraw.Draw(ascii_art_image)
-
 font = ImageFont.load_default()
-print("Resized: ",grayImage.height, grayImage.width)
-grayImage.show()
+
 for y in range(grayImage.height):
     for x in range(grayImage.width):
-        rgb_value = grayImage.getpixel((x, y)) # za svaki pixel za x,y kordinate izvalcimo RGB vrednost
+        rgb_value = grayImage.getpixel((x, y)) # getting RGB value for x,y cordinates of every pixel
         asciiCharacter = mapAsciiToBrightnes(rgb_value, asciiCharacters) # getting the right ascii character for the brightnes of the pixel
         draw.text((x * 10 , y * 10), asciiCharacter, fill=rgb_value, font=font)
 
